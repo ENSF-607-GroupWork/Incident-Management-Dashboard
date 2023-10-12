@@ -1,21 +1,29 @@
+CREATE SCHEMA service_tickets;
+
+USE service_tickets;
+
 CREATE TABLE EventActivity (
 	ID INT AUTO_INCREMENT PRIMARY KEY,  
-    Activityname VARCHAR(20)	/* Activity Name */
+    Activityname VARCHAR(20),	/* Activity Name */
+    INDEX (Activityname)
 );
 
 CREATE TABLE EventOrigin (
 	ID INT AUTO_INCREMENT PRIMARY KEY,
-    Activityname VARCHAR(20)	/* Activity Name */
+    Activityname VARCHAR(20),	/* Activity Name */
+    INDEX (Activityname)
 );
 
 CREATE TABLE EventStatus (
 	ID INT AUTO_INCREMENT PRIMARY KEY,
-    Status VARCHAR(20)    		/* Status Description */
+    Status VARCHAR(20),    		/* Status Description */
+    INDEX (Status)
 );
 
 CREATE TABLE EventClass (
 	ID INT AUTO_INCREMENT PRIMARY KEY,
-    Class VARCHAR(20)			/* Class Description */
+    Class VARCHAR(20),			/* Class Description */
+    INDEX (Class)
 );
 
 CREATE TABLE EventLog (
@@ -31,7 +39,11 @@ CREATE TABLE EventLog (
     UpdateDateTime DATETIME,	/* Date/ Timestamp of ticket record */
     Duration INT,				/* Length of ticket time. Calculated between start date and end date */
     Origin VARCHAR(20),			/* Person/Owner of ticket */
-    Class VARCHAR(20)			/* Ticket class from the class table */
+    Class VARCHAR(20),			/* Ticket class from the class table */
+    FOREIGN KEY (Activity) REFERENCES EventActivity(Activityname),
+    FOREIGN KEY (Origin) REFERENCES EventOrigin(Activityname),
+    FOREIGN KEY (TicketStatus) REFERENCES EventStatus(Status),
+    FOREIGN KEY (Class) REFERENCES EventClass(Class)
 );
 
 
