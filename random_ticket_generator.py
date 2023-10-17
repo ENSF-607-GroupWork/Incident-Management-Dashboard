@@ -15,6 +15,8 @@ priority_dic = {
     'L': 3,
 }
 
+
+
 #User inputs for number of tickets, and time window
 while (True):
     try:
@@ -41,18 +43,20 @@ while(True):
     except ValueError:
         print("Invalid input. Please enter a date in the format YYYY-MM-DD.")
 
-
 conn = mysql.connector.connect(**db_config)
 cursor = conn.cursor()
 
+id_range = range(0, num_tickets)
+
 for _ in range(num_tickets):
-    case_id = f'CS_{random.randint(1, 10000)}'
+
+    case_id = f'CS_{random.sample(id_range, 1)}'
     activity = random.choice(['Design', 'Construction', 'Test', 'Password Reset'])
 
     urgency = random.choice(['H', 'M', 'L'])
     impact = random.choice(['H', 'M', 'L'])
-
     priority = priority_dic.get(urgency) + priority_dic.get(impact) - 1
+
 
     generated_start_date = start_date + timedelta(days=random.randint(0, 100))                          # needs adjusting
     generated_end_date = generated_start_date + timedelta(days=random.randint(1, 100))                  # needs adjusting    
