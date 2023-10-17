@@ -15,10 +15,32 @@ priority_dic = {
     'L': 3,
 }
 
-num_tickets = 100
+#User inputs for number of tickets, and time window
+while (True):
+    try:
+        num_tickets = int(input("Please enter the number of tickets to generate: "))
+        break
+    except ValueError:
+        print("Invalid input. Please enter an integer.")
 
-start_date = datetime(2023, 1, 1)
-end_date = datetime(2023, 6, 30)
+while(True):
+    try:
+        start_date = input("please enter the time window start date (YYYY-MM-DD): ")
+        # Attempt to parse the input string into a datetime object
+        start_date = datetime.strptime(start_date, "%Y-%m-%d")
+        break
+    except ValueError:
+        print("Invalid input. Please enter a date in the format YYYY-MM-DD.")
+
+while(True):
+    try:
+        end_date = input("please enter the time window end date (YYYY-MM-DD): ")
+        # Attempt to parse the input string into a datetime object
+        end_date = datetime.strptime(end_date, "%Y-%m-%d")
+        break  # Exit the loop if the input is a valid date
+    except ValueError:
+        print("Invalid input. Please enter a date in the format YYYY-MM-DD.")
+
 
 conn = mysql.connector.connect(**db_config)
 cursor = conn.cursor()
@@ -43,6 +65,7 @@ for _ in range(num_tickets):
     ticket_class = random.choice(['Change', 'Incident', 'Problem', 'SR'])
 
     # Insert the generated ticket into the database
+
     insert_query = """
     INSERT INTO EventLog (Caseid, Activity, Urgency, Impact, Priority, StartDate, EndDate, TicketStatus, UpdateDateTime, Duration, Origin, Class)
     VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
