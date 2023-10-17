@@ -46,4 +46,10 @@ CREATE TABLE EventLog (
     FOREIGN KEY (Class) REFERENCES EventClass(Class)
 );
 
+INSERT INTO EventActivity (Activityname) VALUES ('Design'), ('Construction'), ('Test'), ('Password Reset');
+INSERT INTO EventOrigin (Activityname) VALUES ('Joe S.'), ('Bill B.'), ('George E.'), ('Achmed M.'), ('Rona E.');
+INSERT INTO EventStatus (Status) VALUES ('Open'), ('On Hold'), ('In Process'), ('Deployed'), ('Deployed Failed');
+INSERT INTO EventClass (Class) VALUES ('Change'), ('Incident'), ('Problem'), ('SR');
+
+
 
