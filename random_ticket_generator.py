@@ -59,8 +59,7 @@ for _ in range(num_tickets):
 
     generated_start_date = start_date + timedelta(days=random.randint(0, (end_date - timedelta(days=14) - start_date).days))                         
     generated_end_date = generated_start_date + timedelta(days=random.randint(1,14))                 
-    ticket_status = random.choice(['Open', 'On Hold', 'In Process', 'Deployed', 'Deployed Failed'])                                                         
-    random_day = random.randrange((end_date - start_date).days)                                                                                         
+    ticket_status = random.choice(['Open', 'On Hold', 'In Process', 'Deployed', 'Deployed Failed'])                                                                                                                                                
     update_datetime = generated_start_date + timedelta(days=random.randint(0, (generated_end_date - generated_start_date).days))                                            
     duration = (generated_end_date - generated_start_date).days
     origin = random.choice(['Joe S.', 'Bill B.', 'George E.', 'Achmed M.', 'Rona E.'])
