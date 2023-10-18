@@ -46,24 +46,22 @@ while(True):
 conn = mysql.connector.connect(**db_config)
 cursor = conn.cursor()
 
-id_range = range(0, num_tickets)
+id_range = list(range(1, num_tickets))
 
 for _ in range(num_tickets):
 
-    case_id = f'CS_{random.sample(id_range, 1)}'
+    case_id = f'CS_{id_range.pop(0)}'
     activity = random.choice(['Design', 'Construction', 'Test', 'Password Reset'])
 
     urgency = random.choice(['H', 'M', 'L'])
     impact = random.choice(['H', 'M', 'L'])
     priority = priority_dic.get(urgency) + priority_dic.get(impact) - 1
 
-
-    generated_start_date = start_date + timedelta(days=random.randint(0, 100))                          # needs adjusting
-    generated_end_date = generated_start_date + timedelta(days=random.randint(1, 100))                  # needs adjusting    
-    ticket_status = random.choice(['Open', 'On Hold', 'In Process', 'Deployed', 'Deployed Failed'])
-    day_range = (end_date - start_date).days                                                            # review
-    random_day = random.randrange(day_range)                                                            # review                                    
-    update_datetime = start_date + timedelta(days=random_day)                                           # review      
+    generated_start_date = start_date + timedelta(days=random.randint(0, (end_date - timedelta(days=14) - start_date).days))                         
+    generated_end_date = generated_start_date + timedelta(days=random.randint(1,14))                 
+    ticket_status = random.choice(['Open', 'On Hold', 'In Process', 'Deployed', 'Deployed Failed'])                                                         
+    random_day = random.randrange((end_date - start_date).days)                                                                                         
+    update_datetime = generated_start_date + timedelta(days=random.randint(0, (generated_end_date - generated_start_date).days))                                            
     duration = (generated_end_date - generated_start_date).days
     origin = random.choice(['Joe S.', 'Bill B.', 'George E.', 'Achmed M.', 'Rona E.'])
     ticket_class = random.choice(['Change', 'Incident', 'Problem', 'SR'])
