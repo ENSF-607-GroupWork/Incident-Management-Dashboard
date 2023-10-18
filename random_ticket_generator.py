@@ -46,7 +46,7 @@ while(True):
 conn = mysql.connector.connect(**db_config)
 cursor = conn.cursor()
 
-id_range = list(range(1, num_tickets))
+id_range = list(range(1, num_tickets + 1))
 
 for _ in range(num_tickets):
 
