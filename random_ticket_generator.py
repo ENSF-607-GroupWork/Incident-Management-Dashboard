@@ -3,9 +3,9 @@ import mysql.connector
 from datetime import datetime, timedelta
 
 db_config = {
-    'host': 'localhost',
-    'user': 'demoaccount',
-    'password': 'ensf607PA$$',
+    'host': 'localhost', 
+    'user': 'demoaccount',     # Edit this to your own account
+    'password': 'ensf607PA$$', # Edit this to your own account password
     'database': 'service_tickets'
 }
 
@@ -14,8 +14,6 @@ priority_dic = {
     'M': 2, 
     'L': 3,
 }
-
-
 
 #User inputs for number of tickets, and time window
 while (True):
