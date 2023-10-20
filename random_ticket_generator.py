@@ -9,10 +9,11 @@ db_config = {
     'database': 'service_tickets'
 }
 
+#dictionary used to calculate 
 priority_dic = {
-    'H': 1, 
-    'M': 2, 
-    'L': 3,
+    'H': 1, #high priority
+    'M': 2, #medium 
+    'L': 3, #low priotity
 }
 
 #User inputs for number of tickets, and time window
